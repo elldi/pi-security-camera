@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request, redirect
 import cv2
 
 app = Flask(__name__)
@@ -9,6 +9,20 @@ camera = cv2.VideoCapture(0)
 @app.route('/')
 def index():
 	return render_template('index.html')
+
+@app.route('/live')
+def live():
+	return render_template('live.html')
+
+@app.route('/login', methods=['POST'])
+def login():
+	print(request.form['hashInput'])
+	print("Logging in")
+	return Response('/live', status=302)
+
+
+
+
 
 def gen():
 	print("Starting camera")

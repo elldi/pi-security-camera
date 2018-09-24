@@ -1,0 +1,13 @@
+<html> 
+ <head> 
+   <title>Security Camera</title> 
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ </head> 
+ <body> 
+   <h1 class= "text-center"> Live from the Office </h1> 
+   	<div class="text-center">
+   		<img src="{{ url_for('video_feed') }}" class="img-fluid rounded"> 
+   	</div>
+ </body> 
+</html> 
