@@ -14,15 +14,13 @@ def index():
 def live():
 	return render_template('live.html')
 
+'''
 @app.route('/login', methods=['POST'])
 def login():
 	print(request.form['hashInput'])
 	print("Logging in")
 	return Response('/live', status=302)
-
-
-
-
+'''
 
 def gen():
 	print("Starting camera")

@@ -20,13 +20,7 @@
 	</div>
    <script>
    		$("#login").click(function() {
-  			var encrypted = CryptoJS.AES.encrypt($("#password").val(), $("#username").val());
-  			var decrypted = CryptoJS.AES.decrypt(encrypted, $("#username").val());
-  			//alert(encrypted);
-  			//alert(decrypted.toString(CryptoJS.enc.Utf8));
-  			$.post( "/login", { hashInput: encrypted.toString() } );
-
-
+  			$.post( "/login", { username: $("#username").val(), password: $("#password").val() } );
 		});
    </script>
  </body> 
