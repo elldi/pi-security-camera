@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 
 from flask import Flask, render_template, Response, request, redirect
-import cv2
+## import cv2
+from picamera import PiCamera
+from io import BytesIO
 
 app = Flask(__name__)
-camera = cv2.VideoCapture(0) 
+## camera = cv2.VideoCapture(0)
 
 @app.route('/')
 def index():
@@ -24,11 +26,19 @@ def login():
 
 def gen():
 	print("Starting camera")
+	'''
 	while True:
 		_, frame = camera.read()
 		frame = cv2.imencode('.jpg', frame)[1].tobytes()
+	'''
+	my_stream = BytesIO()
+	camera = PiCamera()
+	for image in camera.capture_continuous(my_stream, 'jpeg', use_video_port=True):
+		my_stream.seek(0)
 		yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+               	b'Content-Type: image/jpeg\r\n\r\n' + my_stream.read() + b'\r\n')
+		my_stream.seek(0)
+		my_stream.truncate()
 
 @app.route('/video_feed')
 def video_feed():
