@@ -15,13 +15,13 @@ def index():
 
 def gen():
 	##with camera  as camera:
-	my_stream = BytesIO()
-	for image in camera.capture_continuous(my_stream, 'jpeg', use_video_port=True):
-		my_stream.seek(0)
+	image_stream = BytesIO()
+	for image in camera.capture_continuous(image_stream, 'jpeg', use_video_port=True):
+		image_stream.seek(0)
 		yield (b'--frame\r\n'
-              	b'Content-Type: image/jpeg\r\n\r\n' + my_stream.read() + b'\r\n')
-		my_stream.seek(0)
-		my_stream.truncate()
+              	b'Content-Type: image/jpeg\r\n\r\n' + image_stream.read() + b'\r\n')
+		image_stream.seek(0)
+		image_stream.truncate()
 	camera.stop_recording()
 
 @app.route('/video_feed')
