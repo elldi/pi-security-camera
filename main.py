@@ -8,6 +8,9 @@ from io import BytesIO
 app = Flask(__name__)
 ## camera = cv2.VideoCapture(0)
 camera = PiCamera()
+camera.color_effects = (128,128)
+camera.resolution = (1280, 720)
+camera.led = False
 
 @app.route('/')
 def index():
